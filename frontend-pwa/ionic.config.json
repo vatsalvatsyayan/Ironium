@@ -1,0 +1,7 @@
+{
+  "name": "frontend-pwa",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
