@@ -9,102 +9,84 @@
 <ion-content [fullscreen]="true">
 
   <div class="page-layout">
+
+    <div class="list-view">
+
+      <div class="ion-cards">
+
+        <div *ngFor="let prodCategory of productCategories">
+        
+          <ion-card>
+
+            <ion-card-header>
+              <ion-card-title>{{ prodCategory.categoryName }}</ion-card-title>
+            </ion-card-header>
+
+            <div *ngFor="let product of productsByCategory[prodCategory.id]">
+            
+              <ion-card-content>
   
-    <div class="product-category">
+                <ion-list>
   
-      <div class="product">
+                  <ion-item>
   
-        <ion-card>
-          <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
-          <ion-card-header>
-            <ion-card-title>Card Title</ion-card-title>
-            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-          </ion-card-header>
-        
-          <ion-card-content>
-            Here's a small text description for the card content. Nothing more, nothing less.
-          </ion-card-content>
-        </ion-card>
-
-        <ion-card>
-          <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
-          <ion-card-header>
-            <ion-card-title>Card Title</ion-card-title>
-            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-          </ion-card-header>
-        
-          <ion-card-content>
-            Here's a small text description for the card content. Nothing more, nothing less.
-          </ion-card-content>
-        </ion-card>
-
-        <ion-card>
-          <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
-          <ion-card-header>
-            <ion-card-title>Card Title</ion-card-title>
-            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-          </ion-card-header>
-        
-          <ion-card-content>
-            Here's a small text description for the card content. Nothing more, nothing less.
-          </ion-card-content>
-        </ion-card>
-
-        <ion-card>
-          <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
-          <ion-card-header>
-            <ion-card-title>Card Title</ion-card-title>
-            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-          </ion-card-header>
-        
-          <ion-card-content>
-            Here's a small text description for the card content. Nothing more, nothing less.
-          </ion-card-content>
-        </ion-card>
-
-        <ion-card>
-          <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
-          <ion-card-header>
-            <ion-card-title>Card Title</ion-card-title>
-            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-          </ion-card-header>
-        
-          <ion-card-content>
-            Here's a small text description for the card content. Nothing more, nothing less.
-          </ion-card-content>
-        </ion-card>
-
-        <ion-card>
-          <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
-          <ion-card-header>
-            <ion-card-title>Card Title</ion-card-title>
-            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-          </ion-card-header>
-        
-          <ion-card-content>
-            Here's a small text description for the card content. Nothing more, nothing less.
-          </ion-card-content>
-        </ion-card>
-
-        <ion-card>
-          <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
-          <ion-card-header>
-            <ion-card-title>Card Title</ion-card-title>
-            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-          </ion-card-header>
-        
-          <ion-card-content>
-            Here's a small text description for the card content. Nothing more, nothing less.
-          </ion-card-content>
-        </ion-card>
+                    <ion-thumbnail slot="start">
   
+                      <img alt="Silhouette of mountains" src="{{ product.imageUrl }}" />
+  
+                    </ion-thumbnail>
+  
+                    <ion-label>{{ product.name }}</ion-label>
+                    <!-- <ion-label>{{ product.unitPrice | currency:'INR' }}</ion-label> -->
+                    <ion-button>{{ product.unitPrice | currency:'INR' }}</ion-button>
+                    
+  
+                  </ion-item>
+  
+                </ion-list>
+  
+              </ion-card-content>
+              
+            </div>
+            
+          </ion-card>
+        
+        </div>
+
       </div>
-  
+
     </div>
+
+  
+    <!-- <div class="product-category">
+  
+      <div *ngFor="let prodCategory of productCategories" class="product">
+        
+        <h2>{{ prodCategory.categoryName }}</h2>
+
+        <div *ngFor="let product of productsByCategory[prodCategory.id]">
+
+          <ion-card>
+            <img alt="" src="{{ product.imageUrl }}" />
+            <ion-card-header>
+              <ion-card-title>{{ product.name }}</ion-card-title>
+              <ion-card-subtitle>{{ product.unitPrice }}</ion-card-subtitle>
+            </ion-card-header>
+          
+            <ion-card-content>
+              Here's a small text description for the card content. Nothing more, nothing less.
+            </ion-card-content>
+          </ion-card>
+
+        </div>
+      
+        </div>
+  
+    </div> -->
   
   </div>
 
-
+  
 </ion-content>
 
 

@@ -3,13 +3,21 @@
     justify-content: flex-start; /* Align items to the start of the flex container */
     overflow-x: auto; /* Enable horizontal scrolling */
     white-space: nowrap; /* Prevent items from wrapping to the next line */
-    margin-left: 15px; /* Set left side margin */
+    margin-left: 5px; /* Set left side margin */
 }
 
 .product ion-card {
     width: 175px; /* Maximum width of the card */
-    height: 220px;
-    margin-top: 50px;
+    height: 260px;
+    margin-top: 75px;
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
     flex: 0 0 auto; /* Ensure each card takes its natural width */
+}
+
+ion-card img {
+    margin-left: 10px;
+    width: 150px; /* Ensure the image fills the entire width of the card */
+    height: 150px; /* Ensure the image fills the entire height of the card */
+    justify-content: center;
+    object-fit: cover; 
 }
