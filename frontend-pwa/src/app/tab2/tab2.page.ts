@@ -14,7 +14,7 @@ export class Tab2Page {
   productCategories: ProductCategory[] = [];
 
   productsByCategory: {[categoryId : number]: Product[] } = {};
-  
+
   constructor(private orderService: OrderServiceService) {}
 
   async ionViewWillEnter() {
@@ -25,19 +25,12 @@ export class Tab2Page {
 
   async listProductCategories() {
     this.productCategories = await firstValueFrom(this.orderService.getProductCategories());
-    // this.orderService.getProductCategories().subscribe(
-    //   data => {
-    //     this.productCategories = data;
-    //   }
-    // );
   }
 
   listProductsByCategoryId() {
-    console.log(this.productCategories);
     this.productCategories.forEach(prodCategory => {
       this.orderService.getProductsByCategoryId(prodCategory.id)
       .subscribe(products => {
-        console.log('Product=' + JSON.stringify(products));
         this.productsByCategory[prodCategory.id] = products;
       });
     }
