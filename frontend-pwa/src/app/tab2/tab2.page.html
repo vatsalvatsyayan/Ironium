@@ -37,10 +37,18 @@
                     </ion-thumbnail>
   
                     <ion-label>{{ product.name }}</ion-label>
-                    <!-- <ion-label>{{ product.unitPrice | currency:'INR' }}</ion-label> -->
+                    
+                    <ion-button (click)="decrementQuantity(product)">
+                      <ion-icon name="remove-outline"></ion-icon>
+                    </ion-button>
+
                     <ion-button>{{ product.unitPrice | currency:'INR' }}</ion-button>
                     
-  
+                    <ion-button (click)="incrementQuantity(product)">
+                      <ion-icon name="add-outline">
+                      </ion-icon>
+                    </ion-button>
+                    
                   </ion-item>
   
                 </ion-list>
