@@ -9,6 +9,8 @@ import { BagService } from '../services/bag.service';
 export class TabsPage {
 
   totalQuantity: number = 0;
+
+  storage: Storage = localStorage;
   
   constructor(private bagService: BagService) {}
 
@@ -21,6 +23,16 @@ export class TabsPage {
     this.bagService.totalQuantity.subscribe(
       data => this.totalQuantity = data
     );  
+
+    if(this.totalQuantity === 0)
+    {
+      const storedValue = this.storage.getItem('totalQuantityValue');
+
+      if(storedValue)
+      {
+        this.totalQuantity = parseInt(storedValue);
+      }
+    }
 
   }
 

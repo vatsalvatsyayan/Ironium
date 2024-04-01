@@ -39,9 +39,7 @@ export class BagService {
       this.bagItems.push(bagItem);
     }
 
-    // compute cart total price and total quantity
     this.computeCartTotals();
-
   }
 
   decrementQuantity(bagItem: BagItem)
@@ -89,7 +87,6 @@ export class BagService {
 
   computeCartTotals() 
   {
-
     if(this.bagItems.length < 0)
     {
       return;
@@ -111,11 +108,13 @@ export class BagService {
     this.logCartData(totalPriceValue, totalQuantityValue);
 
     // persist cart data
-    this.persistBagItems();
+    this.persistBagItems(totalPriceValue, totalQuantityValue);
   }
 
-  persistBagItems() {
+  persistBagItems(totalPriceValue : number, totalQuantityValue : number) {
     this.storage.setItem('bagItems', JSON.stringify(this.bagItems));
+    this.storage.setItem('totalPriceValue', totalPriceValue.toString());
+    this.storage.setItem('totalQuantityValue', totalQuantityValue.toString());
   }
 
   logCartData(totalPriceValue: number, totalQuantityValue: number) {
@@ -127,6 +126,29 @@ export class BagService {
       console.log(`name: ${tempCartItem.name}, quantity=${tempCartItem.quantity}, unitPrice:${tempCartItem.unitPrice}, subTotalPrice:${subTotalPrice}`);
     }
 
+  }
+
+  loadBagItems() : BagItem[] {
+
+    if(this.bagItems.length === 0)
+    {
+      const storedValue = this.storage.getItem('bagItems');
+      
+      if(storedValue)
+      {
+        try
+        {
+          this.bagItems = JSON.parse(storedValue);
+          this.computeCartTotals()
+        } 
+        catch (error)
+        {
+          console.error('Error parsing JSON:', error);
+        }
+      }
+    }
+
+    return this.bagItems;
   }
 
 }

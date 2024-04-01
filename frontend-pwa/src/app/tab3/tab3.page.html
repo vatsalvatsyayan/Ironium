@@ -1,17 +1,52 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 3
+      Ironium
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="page-layout">
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+    <div class="list-view">
+
+      <ion-card>
+
+        <ion-card-header>
+          <ion-card-title>My Bag</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+
+          <ion-list> 
+          <div *ngFor="let bagItem of bagItems">
+
+            <ion-item>
+              
+              <ion-thumbnail slot="start">
+                <img alt="Silhouette of mountains" src={{bagItem.imageUrl}} />
+              </ion-thumbnail>
+              <ion-label>{{bagItem.name}}</ion-label>
+
+              <ion-button (click)="decrementQuantity(bagItem)">
+                <ion-icon name="remove-outline"></ion-icon>
+              </ion-button>
+              
+              <ion-button>{{bagItem.quantity}}</ion-button>
+
+              <ion-button (click)="incrementQuantity(bagItem)">
+                <ion-icon name="add-outline">
+                </ion-icon>
+              </ion-button>
+              
+            </ion-item>
+          </div>
+          </ion-list>
+        </ion-card-content>
+        
+      </ion-card>
+
+    </div>
+
+  </div>
 </ion-content>
