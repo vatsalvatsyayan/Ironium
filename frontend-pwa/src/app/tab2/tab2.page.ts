@@ -3,6 +3,8 @@ import { OrderServiceService } from '../services/order-service.service';
 import { ProductCategory } from '../common/product-category';
 import { Product } from '../common/product';
 import { firstValueFrom } from 'rxjs';
+import { BagItem } from '../common/bag-item';
+import { BagService } from '../services/bag.service';
 
 @Component({
   selector: 'app-tab2',
@@ -15,7 +17,7 @@ export class Tab2Page {
 
   productsByCategory: {[categoryId : number]: Product[] } = {};
 
-  constructor(private orderService: OrderServiceService) {}
+  constructor(private orderService: OrderServiceService, private bagService: BagService) {}
 
   async ionViewWillEnter() {
     await this.listProductCategories();
@@ -36,6 +38,17 @@ export class Tab2Page {
     }
 
     );
+  }
+
+  incrementQuantity(product: Product){
+      const bagItem = new BagItem(product);
+      this.bagService.addToCart(bagItem);
+  }
+
+  decrementQuantity(product: Product)
+  {
+    const bagItem = new BagItem(product);
+    this.bagService.decrementQuantity(bagItem);
   }
 
 }
