@@ -13,6 +13,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 import com.ironium.backendangular.dao.ProductRepository;
 import com.ironium.backendangular.entity.Product;
+import com.ironium.backendangular.entity.Users;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.metamodel.EntityType;
@@ -39,7 +40,6 @@ public class MyDataRestConfig implements RepositoryRestConfigurer{
     
         disableHttpMethods(Product.class, config, theUnsupportedActions);  
         disableHttpMethods(ProductRepository.class, config, theUnsupportedActions); 
-
 
         // expose Id
         exposeIds(config); 

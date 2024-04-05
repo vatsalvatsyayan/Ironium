@@ -3,6 +3,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { CallbackComponent } from './components/callback/callback.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { RegistrationComponent } from './components/registration/registration.component';
+import { RegistrationRouterComponent } from './components/registration-router/registration-router.component';
 
 const routes: Routes = [
   {
@@ -20,6 +22,14 @@ const routes: Routes = [
   {
     path: 'logout',
     component: LogoutComponent
+  },
+  {
+    path: 'register',
+    component: RegistrationComponent
+  },
+  {
+    path: 'registrationRouter',
+    component: RegistrationRouterComponent
   }
 ];
 @NgModule({

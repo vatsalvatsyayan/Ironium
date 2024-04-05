@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
-import { BehaviorSubject, Observable, catchError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, firstValueFrom, from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,44 +20,38 @@ export class AuthenticationService {
   }
 
   logout(): void {
-    sessionStorage.removeItem('isAuthenticated');
-    sessionStorage.setItem('isAuthenticated', 'false');
+    sessionStorage.clear();
     this.auth.logout();
   }
 
   handleAuthentication(): void {
-
     sessionStorage.removeItem('isAuthenticated');
-
-    this.auth.isAuthenticated$.subscribe(
-    (isAuthenticated) => {
-      if(isAuthenticated)
-      {
-        sessionStorage.setItem('isAuthenticated', 'true');
-        this.getUserDetails();
-      }
-      else
-      {
-        sessionStorage.setItem('isAuthenticated', 'false');
-      }
-    }
-  );
-
-  this.router.navigate(['/tabs/tab2']);
-
+  
+    firstValueFrom(this.auth.isAuthenticated$).then(
+      (isAuthenticated) => {
+          if (isAuthenticated) {
+            sessionStorage.setItem('isAuthenticated', 'true');
+            this.getUserDetails();
+          } else {
+            sessionStorage.setItem('isAuthenticated', 'false');
+          }
+    }).catch((error) => {
+      // Handle errors
+      console.log('Failure in handling user authentication');
+    });
   }
 
-  getUserDetails() {
-    this.auth.user$.subscribe(
-      (user) => {
-        if (user)
-        {
-          // to be enhanced further
-          this.userEmail = user.email;
-        }
+  async getUserDetails(): Promise<void> {
+    try {
+      const user = await firstValueFrom(this.auth.user$);
+      if (user) {
+        this.userEmail = user.email;
+        sessionStorage.setItem('userEmail', user.email!);
       }
-    );
-
+    } catch (error) {
+      console.log('could not get user email');
+      // Handle errors
+    }
   }
 
   isAuthenticated() : boolean {
