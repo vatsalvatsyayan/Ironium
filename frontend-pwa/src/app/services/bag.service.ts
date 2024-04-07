@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BagItem } from '../common/bag-item';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { CheckoutService } from './checkout.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class BagService {
 
   storage: Storage = localStorage;
   
-  constructor() { }
+  constructor(private checkoutService : CheckoutService) {
+  }
 
   addToCart(bagItem: BagItem)
   {
@@ -126,6 +128,11 @@ export class BagService {
       console.log(`name: ${tempCartItem.name}, quantity=${tempCartItem.quantity}, unitPrice:${tempCartItem.unitPrice}, subTotalPrice:${subTotalPrice}`);
     }
 
+  }
+
+  processOrder(bagItems: BagItem[])
+  {
+      
   }
 
   loadBagItems() : BagItem[] {
