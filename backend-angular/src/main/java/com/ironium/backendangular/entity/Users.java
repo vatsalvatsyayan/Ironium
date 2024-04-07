@@ -1,10 +1,15 @@
 package com.ironium.backendangular.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,4 +43,19 @@ public class Users {
     @Column(name = "locality")
     private String locality;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Order> orders = new HashSet<>();
+
+    public void add(Order order) {
+
+        if (order != null) {
+
+            if (orders == null) {
+                orders = new HashSet<>();
+            }
+
+            orders.add(order);
+            order.setUser(this);
+        }
+    }
 }
