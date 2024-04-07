@@ -11,7 +11,9 @@ export class RegistrationService {
   private baseUrl = 'http://localhost:8080/api/users';
 
   private userWithEmail = this.baseUrl + '/search/findByEmail?email='
-  
+
+  user! : User;
+
   constructor(private httpClient: HttpClient) { }
 
   async checkIfUserIsRegistered(email: string): Promise<boolean> {
@@ -19,8 +21,8 @@ export class RegistrationService {
     
     try {
       const response = await this.httpClient.get<User>(this.userWithEmail + email, { observe: 'response' }).toPromise();
-      
       if (response!.status === 200) {
+        this.user = response?.body!
         return true;
       } else {
         return false;
