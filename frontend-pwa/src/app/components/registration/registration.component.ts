@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { User } from 'src/app/common/user';
+import { BagService } from 'src/app/services/bag.service';
 import { RegistrationService } from 'src/app/services/registration.service';
 import { RegistrationValidators } from 'src/app/validators/registration-validators';
 
@@ -17,7 +18,10 @@ export class RegistrationComponent  implements OnInit {
   
   storage: Storage = sessionStorage;
   
-  constructor(private formBuilder: FormBuilder, private registrationService: RegistrationService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, 
+              private registrationService: RegistrationService, 
+              private router: Router,
+              private bagService: BagService) { }
 
   ngOnInit() {
   
@@ -50,6 +54,7 @@ export class RegistrationComponent  implements OnInit {
     try {
       const createdUser = await firstValueFrom(this.registrationService.createUser(user));
       this.registrationFormGroup.reset();
+      this.bagService.processOrder();
     } catch (error) {
       console.error('Error creating user:', error);
       this.registrationFormGroup.reset();

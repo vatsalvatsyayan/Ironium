@@ -2,6 +2,12 @@ import { Injectable } from '@angular/core';
 import { BagItem } from '../common/bag-item';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { CheckoutService } from './checkout.service';
+import { RegistrationService } from './registration.service';
+import { Router } from '@angular/router';
+import { Order } from '../common/order';
+import { OrderItem } from '../common/order-item';
+import { User } from '../common/user';
+import { Purchase } from '../common/purchase';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +20,11 @@ export class BagService {
   totalQuantity: Subject<number> = new BehaviorSubject<number>(0);
 
   storage: Storage = localStorage;
+  sessionStorage: Storage = sessionStorage;
   
-  constructor(private checkoutService : CheckoutService) {
+  constructor(private checkoutService : CheckoutService,
+              private registrationService: RegistrationService,
+              private router: Router) {
   }
 
   addToCart(bagItem: BagItem)
@@ -130,9 +139,52 @@ export class BagService {
 
   }
 
-  processOrder(bagItems: BagItem[])
+  async processOrder()
   {
-      
+    const userEmail = this.sessionStorage.getItem('userEmail');  
+
+    try{
+      const isRegistered = await this.registrationService.checkIfUserIsRegistered(userEmail!);
+
+      if(!isRegistered)
+      {
+        this.router.navigateByUrl('/register');
+        return;
+      }
+
+    }
+    catch (error) {
+      console.error('Error:', error);
+      // Handle error if needed
+    }
+
+    let order = new Order();
+    order.totalPrice = parseFloat(this.storage.getItem('totalPriceValue')!);
+    order.totalQuantity = parseFloat(this.storage.getItem('totalQuantityValue')!);
+
+    const bagItems = this.bagItems;
+    let orderItems: OrderItem[] = bagItems.map(bagItem => new OrderItem(bagItem));
+
+
+
+    let purchase = new Purchase();
+    purchase.order = order;
+    purchase.orderItems = orderItems;
+    purchase.user = this.registrationService.user;
+
+    this.checkoutService.placeOrder(purchase).subscribe(
+      {
+        next: response => {
+            alert(`Your order has been received. \nOrder tracking number: ${response.orderTrackingNumber}`);
+
+            // reset cart
+            this.resetCart();
+        },
+        error: err => {
+          alert(`There was an error: ${err.message}`);
+        }        
+      }
+    );
   }
 
   loadBagItems() : BagItem[] {
@@ -156,6 +208,17 @@ export class BagService {
     }
 
     return this.bagItems;
+  }
+
+  resetCart() {
+    // reset cart data
+    this.bagItems = [];
+    this.totalPrice.next(0);
+    this.totalQuantity.next(0);
+    this.computeCartTotals();
+
+    // navigate back to products page
+    this.router.navigateByUrl('/tabs/tab2');
   }
 
 }

@@ -7,6 +7,7 @@ import { Purchase } from '../common/purchase';
 import { User } from '../common/user';
 import { CheckoutService } from '../services/checkout.service';
 import { Router } from '@angular/router';
+import { RegistrationService } from '../services/registration.service';
 
 @Component({
   selector: 'app-tab3',
@@ -20,9 +21,11 @@ export class Tab3Page {
   totalQuantity: number = 0;
 
   storage: Storage = localStorage;
+  sessionStorage: Storage = sessionStorage;
   
   constructor(private bagService: BagService,
               private checkoutService: CheckoutService,
+              private registrationService: RegistrationService,
               private router: Router) {}
 
   async ionViewWillEnter() {
@@ -54,36 +57,7 @@ export class Tab3Page {
 
   processOrder()
   {
-      let order = new Order();
-      order.totalPrice = this.totalPrice;
-      order.totalQuantity = this.totalQuantity;
-
-      const bagItems = this.bagService.bagItems;
-
-      let orderItems: OrderItem[] = bagItems.map(bagItem => new OrderItem(bagItem));
-
-      let user = new User("VVa", "VVb", "vj@gmail.com", 1234567898, "12B", "Arawali");
-
-
-      let purchase = new Purchase();
-      purchase.order = order;
-      purchase.orderItems = orderItems;
-      purchase.user = user;
-
-      this.checkoutService.placeOrder(purchase).subscribe(
-        {
-          next: response => {
-              alert(`Your order has been received. \nOrder tracking number: ${response.orderTrackingNumber}`);
-  
-              // reset cart
-              this.resetCart();
-          },
-          error: err => {
-            alert(`There was an error: ${err.message}`);
-          }        
-        }
-      );
-
+    this.bagService.processOrder();  
   }
 
   resetCart() {
