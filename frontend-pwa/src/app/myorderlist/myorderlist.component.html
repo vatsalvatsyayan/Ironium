@@ -1,0 +1,47 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Ironium
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="page-layout">
+
+    <div class="list-view">
+
+      <ion-card>
+
+        <ion-card-header>
+          <ion-card-title>My Order</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+
+          <ion-list> 
+          <div *ngFor="let orderItem of myOrder">
+
+            <ion-item>
+              
+              <ion-thumbnail slot="start">
+                <img alt="Silhouette of mountains" src={{orderItem.imageUrl}} />
+              </ion-thumbnail>
+
+              <ion-card-content>
+                Quantity - {{orderItem.quantity}}
+              </ion-card-content>
+              
+            </ion-item>
+          </div>
+
+          <h2>Total Quantity - {{totalQuantity}}</h2>
+          <h2>Total Price - {{totalPrice}}</h2>
+          </ion-list>
+        </ion-card-content>
+        
+      </ion-card>
+
+    </div>
+
+  </div>
+</ion-content>

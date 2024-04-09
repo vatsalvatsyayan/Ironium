@@ -1,11 +1,35 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1 sz
+      Ironium
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
+  <div *ngFor="let orders of myOrders">
+    
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>{{orders.dateCreated | date: 'medium'}}</ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content>
+        Total Quantity - {{orders.totalQuantity}}
+      </ion-card-content>
+
+      <ion-card-content>
+        Total Price - {{orders.totalPrice}}
+      </ion-card-content>
+
+      <ion-card-content>
+        Status - {{orders.status}}
+      </ion-card-content>
+    
+      <ion-button (click) = "showOrderListItems(orders.orderItems, orders.totalPrice, orders.totalQuantity)" fill="clear">Show Order</ion-button>
+    </ion-card>
+
+  </div>
 
 </ion-content>

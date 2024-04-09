@@ -14,10 +14,12 @@ import { CallbackComponent } from './components/callback/callback.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { RegistrationRouterComponent } from './components/registration-router/registration-router.component';
+import { CommonModule } from '@angular/common';
+import { MyorderlistComponent } from './myorderlist/myorderlist.component';
 
 @NgModule({
-  declarations: [AppComponent, RegistrationComponent, LoginComponent, CallbackComponent, LogoutComponent, RegistrationRouterComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule,
+  declarations: [AppComponent, RegistrationComponent, LoginComponent, CallbackComponent, LogoutComponent, RegistrationRouterComponent, MyorderlistComponent],
+  imports: [BrowserModule, CommonModule ,IonicModule.forRoot(), AppRoutingModule, HttpClientModule,
             ReactiveFormsModule,
             AuthModule.forRoot({
               domain: 'dev-6ztx7jb2twrna510.us.auth0.com',
