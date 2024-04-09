@@ -5,6 +5,7 @@ import { CallbackComponent } from './components/callback/callback.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { RegistrationRouterComponent } from './components/registration-router/registration-router.component';
+import { MyorderlistComponent } from './myorderlist/myorderlist.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path: 'registrationRouter',
     component: RegistrationRouterComponent
+  },
+  {
+    path: 'myOrderList',
+    component: MyorderlistComponent
   }
 ];
 @NgModule({
