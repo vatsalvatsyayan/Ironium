@@ -1,11 +1,22 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Injector, NgModule } from '@angular/core';
+import { Router, RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
+import { AuthGuard, AuthService } from '@auth0/auth0-angular';
+
+function sendToLoginPage(auth: AuthService, injector : Injector){
+  // use injector to acccess any service available within your app
+  const router = injector.get(Router);
+
+  // redirect the user to your custom login page
+  router.navigate(['/login']);
+}
 
 const routes: Routes = [
   {
     path: 'tabs',
     component: TabsPage,
+    canActivate: [AuthGuard],
+    data: {onAuthRequired: sendToLoginPage},
     children: [
       {
         path: 'tab1',
