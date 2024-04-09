@@ -15,6 +15,7 @@ import { RegistrationValidators } from 'src/app/validators/registration-validato
 export class RegistrationComponent  implements OnInit {
 
   registrationFormGroup: FormGroup = new FormGroup({});
+  agreeChecked: boolean = false;
   
   storage: Storage = sessionStorage;
   
@@ -69,5 +70,12 @@ export class RegistrationComponent  implements OnInit {
   get phoneNumber() { return this.registrationFormGroup.get('user.phoneNumber'); }
   get houseNo() { return this.registrationFormGroup.get('user.houseNo'); }
   get locality() { return this.registrationFormGroup.get('user.locality'); }
+
+
+  checkboxChanged(event: CustomEvent) {
+    this.agreeChecked = event.detail.checked;
+    console.log('Checkbox status:', this.agreeChecked);
+    // You can perform further actions based on the checkbox status here
+  }
 
 }
