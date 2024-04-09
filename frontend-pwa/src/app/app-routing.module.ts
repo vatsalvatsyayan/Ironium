@@ -6,6 +6,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { RegistrationRouterComponent } from './components/registration-router/registration-router.component';
 import { MyorderlistComponent } from './myorderlist/myorderlist.component';
+import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,10 @@ const routes: Routes = [
   {
     path: 'myOrderList',
     component: MyorderlistComponent
+  },
+  {
+    path: 'termsandconditions',
+    component: TermsAndConditionsComponent
   }
 ];
 @NgModule({

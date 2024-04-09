@@ -16,9 +16,10 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { RegistrationRouterComponent } from './components/registration-router/registration-router.component';
 import { CommonModule } from '@angular/common';
 import { MyorderlistComponent } from './myorderlist/myorderlist.component';
+import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
 
 @NgModule({
-  declarations: [AppComponent, RegistrationComponent, LoginComponent, CallbackComponent, LogoutComponent, RegistrationRouterComponent, MyorderlistComponent],
+  declarations: [AppComponent, RegistrationComponent, LoginComponent, CallbackComponent, LogoutComponent, RegistrationRouterComponent, MyorderlistComponent, TermsAndConditionsComponent],
   imports: [BrowserModule, CommonModule ,IonicModule.forRoot(), AppRoutingModule, HttpClientModule,
             ReactiveFormsModule,
             AuthModule.forRoot({

@@ -145,9 +145,12 @@
                             </div>
                         </div>
                     </div>
+                    <br>
 
+                    <ion-checkbox labelPlacement="end" (ionChange)="checkboxChanged($event)">I agree to the <a href="/termsandconditions">terms and conditions</a></ion-checkbox>
+                    <br>
                     <div class="text-center">
-                        <ion-button type="submit" expand="block">Purchase</ion-button> 
+                        <ion-button type="submit" expand="block" [disabled]="!agreeChecked">Purchase</ion-button> 
                     </div>
 
 
