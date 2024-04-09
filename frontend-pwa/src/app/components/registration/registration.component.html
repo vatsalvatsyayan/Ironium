@@ -1,19 +1,29 @@
+<ion-content [fullscreen]="true">
+<ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-title>
+        Ironium
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
 <div class="main-content page-m">
 
     <div class="section-content section-content-p30">
 
+        <div class="container">
 
-        <div class="container-fluid">
-
-            <form [formGroup]="registrationFormGroup" (ngSubmit)="onSubmit()">
+            <form [formGroup]="registrationFormGroup" (ngSubmit)="onSubmit()" id="form">
                 
                 <div formGroupName="user" class="form-area">
 
                     <div class="row">
-                        <div class="col-md-2"> <label>First Name</label></div>
+                        <div class="col-md-2"> </div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <input formControlName="firstName" type="text">
+                                <ion-item>
+                                    <ion-input label="First Name" formControlName="firstName" type="text" name="firstName"></ion-input>
+                                </ion-item>
                             
                                 <div *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)" class="alert alert-danger">
                                         
@@ -31,10 +41,12 @@
 
 
                     <div class="row">
-                        <div class="col-md-2"> <label>Last Name</label></div>
+                        <div class="col-md-2"></div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <input formControlName="lastName" type="text">
+                                <ion-item>
+                                    <ion-input label="Last Name" formControlName="lastName" type="text" name="firstName"></ion-input>
+                                </ion-item>
                                 <div *ngIf="lastName?.invalid && (lastName?.dirty || lastName?.touched)" class="alert alert-danger">
                                         
                                     <div *ngIf="lastName?.errors?.['required'] || lastName?.errors?.['notOnlyWhitespace']">
@@ -50,10 +62,12 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-2"> <label>Phone Number</label></div>
+                        <div class="col-md-2"> </div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <input formControlName="phoneNumber" type="text">
+                                <ion-item>
+                                    <ion-input label="Phone Number" formControlName="phoneNumber" type="text" name="firstName"></ion-input>
+                                </ion-item>
                                 <div *ngIf="phoneNumber?.invalid && (phoneNumber?.dirty || phoneNumber?.touched)" class="alert alert-danger">
                                         
                                     <div *ngIf="phoneNumber?.errors?.['required'] || phoneNumber?.errors?.['notOnlyWhitespace']">
@@ -69,10 +83,12 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-2"> <label>Email</label></div>
+                        <div class="col-md-2"></div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <input formControlName="email" type="text">
+                                <ion-item>
+                                    <ion-input label="Email" formControlName="email" type="text" name="firstName"></ion-input>
+                                </ion-item>
                                 <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="alert alert-danger mt-1">
 
                                     <div *ngIf="email?.errors?.['required']">
@@ -89,10 +105,12 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-2"> <label>Apartment/House No</label></div>
+                        <div class="col-md-2"></div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <input formControlName="houseNo" type="text">
+                                <ion-item>
+                                    <ion-input label="House Number" formControlName="houseNo" type="text" name="firstName"></ion-input>
+                                </ion-item>
                                 <div *ngIf="houseNo?.invalid && (houseNo?.dirty || houseNo?.touched)" class="alert alert-danger">
                                         
                                     <div *ngIf="houseNo?.errors?.['required'] || houseNo?.errors?.['notOnlyWhitespace']">
@@ -108,10 +126,12 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-2"> <label>Locality</label></div>
+                        <div class="col-md-2"></div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <input formControlName="locality" type="text">
+                                <ion-item>
+                                    <ion-input label="Locality" formControlName="locality" type="text" name="firstName"></ion-input>
+                                </ion-item>
                                 <div *ngIf="locality?.invalid && (locality?.dirty || locality?.touched)" class="alert alert-danger">
                                         
                                     <div *ngIf="locality?.errors?.['required'] || locality?.errors?.['notOnlyWhitespace']">
@@ -127,7 +147,7 @@
                     </div>
 
                     <div class="text-center">
-                        <button type="submit" class="btn btn-info">Purchase</button>
+                        <ion-button type="submit" expand="block">Purchase</ion-button> 
                     </div>
 
 
@@ -142,3 +162,4 @@
     </div>
 
 </div>
+</ion-content>
