@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -17,6 +17,7 @@ import { RegistrationRouterComponent } from './components/registration-router/re
 import { CommonModule } from '@angular/common';
 import { MyorderlistComponent } from './myorderlist/myorderlist.component';
 import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [AppComponent, RegistrationComponent, LoginComponent, CallbackComponent, LogoutComponent, RegistrationRouterComponent, MyorderlistComponent, TermsAndConditionsComponent],
@@ -44,6 +45,12 @@ import { TermsAndConditionsComponent } from './components/terms-and-conditions/t
                   }
                 ]
               }
+            }),
+            ServiceWorkerModule.register('ngsw-worker.js', {
+              enabled: !isDevMode(),
+              // Register the ServiceWorker as soon as the application is stable
+              // or after 30 seconds (whichever comes first).
+              registrationStrategy: 'registerWhenStable:30000'
             }),
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },  {
